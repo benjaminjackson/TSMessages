@@ -502,7 +502,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     if (tapGesture.state == UIGestureRecognizerStateRecognized)
     {
-        if (self.callback)
+        // Sometimes, when shown over a navigation bar or tab bar, the button stops responding
+        // depending on the height of the notification. This catches it and triggers the button
+        // callback instead
+        UIView *view = [self hitTest:[tapGesture locationInView:self] withEvent:nil];
+        if (self.buttonCallback) {
+            self.buttonCallback();
+        }
+        else if (self.callback)
         {
             self.callback();
         }
