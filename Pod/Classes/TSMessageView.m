@@ -506,7 +506,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         // depending on the height of the notification. This catches it and triggers the button
         // callback instead
         UIView *view = [self hitTest:[tapGesture locationInView:self] withEvent:nil];
-        if (self.buttonCallback) {
+        if (self.buttonCallback && [view isKindOfClass:[UIButton class]]) {
             self.buttonCallback();
         }
         else if (self.callback)
