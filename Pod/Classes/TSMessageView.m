@@ -350,7 +350,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             [self addGestureRecognizer:tapRec];
         }
         
-        if (self.callback) {
+        if (self.callback || self.buttonCallback) {
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
             tapGesture.delegate = self;
             [self addGestureRecognizer:tapGesture];
