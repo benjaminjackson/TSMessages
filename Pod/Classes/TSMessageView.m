@@ -283,19 +283,20 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             }
             
             [self.button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
-            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+            CGFloat fontSize = [[current valueForKey:@"buttonFontSize"] floatValue];
+            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:fontSize];
             self.button.titleLabel.shadowOffset = CGSizeMake([[current valueForKey:@"buttonTitleShadowOffsetX"] floatValue],
                                                              [[current valueForKey:@"buttonTitleShadowOffsetY"] floatValue]);
             [self.button addTarget:self
                             action:@selector(buttonTapped:)
                   forControlEvents:UIControlEventTouchUpInside];
             
-            self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0);
+            self.button.contentEdgeInsets = UIEdgeInsetsMake(5.0, 10.0, 5.0, 10.0);
             [self.button sizeToFit];
             self.button.frame = CGRectMake(screenWidth - padding - self.button.frame.size.width,
                                            0.0,
                                            self.button.frame.size.width,
-                                           31.0);
+                                           MAX(self.button.frame.size.height, 40.0));
             
             [self addSubview:self.button];
             
