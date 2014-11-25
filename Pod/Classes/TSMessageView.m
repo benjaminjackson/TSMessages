@@ -35,6 +35,9 @@ static NSMutableDictionary *_notificationDesign;
 /** The view controller this message is displayed in */
 @property (nonatomic, strong) UIViewController *viewController;
 
+/** Can the user dismiss this view? */
+@property (nonatomic) BOOL dismissingEnabled;
+
 
 /** Internal properties needed to resize the view on device rotation properly */
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -121,6 +124,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         _duration = duration;
         _viewController = viewController;
         _messagePosition = position;
+        _dismissingEnabled = dismissingEnabled;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
         
@@ -513,6 +517,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         else if (self.callback)
         {
             self.callback();
+        }
+        if (self.dismissingEnabled) {
+            [self fadeMeOut];
         }
     }
 }
