@@ -394,6 +394,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     
     currentHeight += padding;
     
+    if (currentHeight < self.button.frame.size.height + padding * 2) {
+        CGFloat extraPadding = floorf((self.button.frame.size.height + padding * 2 - currentHeight)/2.0);
+        self.titleLabel.frame = CGRectOffset(self.titleLabel.frame, 0, extraPadding);
+        self.contentLabel.frame = CGRectOffset(self.contentLabel.frame, 0, extraPadding);
+        currentHeight = self.button.frame.size.height + padding * 2;
+    }
+    
     if (self.iconImageView)
     {
         // Check if that makes the popup larger (height)
